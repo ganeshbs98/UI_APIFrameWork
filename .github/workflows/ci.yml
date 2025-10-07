@@ -14,11 +14,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+        
     - name: Build with Maven
       run: mvn test -DsuiteXmlFile=testng.xml -Denv=qa
+
+    - name: Build to Upload Artifact
+      if : always()
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: Surfire Reports
+        path: target/surefire-reports
+        retention-days: 10
+        
