@@ -16,6 +16,7 @@ public class ConfigManager {
     static {
         env = System.getProperty("env","qa");
         env=env.toLowerCase().trim();
+        System.out.println("Running in Environment: "+env);
         switch (env) {
             case "qa" -> path = "config.qa.properties";
 
@@ -26,6 +27,7 @@ public class ConfigManager {
             default -> path = "config.properties";
         }
         InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
+
         if (input == null) {
             throw new RuntimeException("Unable to find config.properties file");
         }
