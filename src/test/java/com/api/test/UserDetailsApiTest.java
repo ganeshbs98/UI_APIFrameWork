@@ -11,6 +11,7 @@ import static com.api.constants.Role.*;
 import com.api.constants.Role;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
+import com.api.utils.specUtil;
 import io.restassured.http.ContentType;
 import static org.hamcrest.Matchers.*;
 
@@ -23,25 +24,12 @@ import org.testng.annotations.Test;
 public class UserDetailsApiTest {
     @Test
     public void UserDetailsApiTest(){
-        Header authHeader = new Header("Authorization", AuthTokenProvider.getAuthToken(FD));
-       given().baseUri(ConfigManager.loadProperties().getProperty("URI"))
-                .and()
-                .header(authHeader)
-                .and()
-                .accept(ContentType.JSON)
-                .log().uri()
-                .log().headers()
-                .log().method()
+       given().spec(specUtil.RequestSpecAuth(FD))
                 .when()
                 .get("userdetails")
                 .then()
-                .log().status()
-               .log().all()
-                .statusCode(200)
-                .time(lessThan(1000L))
+                .spec(specUtil.ResponseSpec_Ok())
                 .and()
                 .body(matchesJsonSchemaInClasspath("response-schema/UserDetailsResponseSchema.json"));
-
-
     }
 }
