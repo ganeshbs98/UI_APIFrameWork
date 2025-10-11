@@ -6,6 +6,7 @@ import static io.restassured.RestAssured.*;
 import com.api.pojo.*;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
+import static com.api.utils.DateTimeUtil.*;
 import com.api.utils.specUtil;
 import io.restassured.http.ContentType;
 
@@ -15,6 +16,8 @@ import static org.hamcrest.Matchers.*;
 
 import org.testng.annotations.Test;
 
+import java.sql.SQLOutput;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +25,14 @@ public class CreateJobApiTest {
 
     @Test
     public void createJobApiTest() {
+        System.out.println(Instant.now());
+        System.out.println("***********************");
+
 
         Customer customer = new Customer("Denis", "Boyer", "986-350-8890", "9823984974", "abc@gmail.com", "abc2@gmail.com");
         System.out.println(customer.first_name());
         Customer_Address customer_address = new Customer_Address("c 304", "Jupiter", "MG road", "Bangur Nagar", "Goregaon West", "411039", "India", "Maharashtra");
-        Customer_Product customerProduct = new Customer_Product("2025-04-06T18:30:00.000Z", "26889419449447", "26889419449447", "26889419449447", "025-04-06T18:30:00.000Z", 1, 1);
+        Customer_Product customerProduct = new Customer_Product(getDateTimeWithAgo(10), "26889419449447", "26889419449447", "26889419449447", getDateTimeWithAgo(10), 1, 1);
         Problems problems = new Problems(1, "Battery Issue");
         List<Problems> problemsList = new ArrayList<>();
         problemsList.add(problems);

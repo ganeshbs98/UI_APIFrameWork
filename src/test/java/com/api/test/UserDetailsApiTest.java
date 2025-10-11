@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 public class UserDetailsApiTest {
     @Test
     public void UserDetailsApiTest(){
+
        given().spec(specUtil.RequestSpecAuth(FD))
                 .when()
                 .get("userdetails")
