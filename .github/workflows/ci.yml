@@ -39,7 +39,7 @@ jobs:
         cache: maven
         
     - name: Build with Maven
-      run: mvn test -DsuiteXmlFile="${{ github.events.inputs.suite_file }}" -Denv="${{ github.events.inputs.env }}"
+      run: mvn test -DsuiteXmlFile="${{ github.event.inputs.suite_file || 'testng.xml' }}" -Denv="${{ github.event.inputs.env || 'qa' }}"
 
     - name: Build to Upload Artifact
       if : always()
