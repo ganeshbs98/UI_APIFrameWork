@@ -24,6 +24,12 @@ public class specUtil {
 
     }
 
+    public static RequestSpecification RequestSpec_withHeader_Payload(Role role,Object userCredentials) {
+        RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).addHeader("Authorization",AuthTokenProvider.getAuthToken(role)).setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(userCredentials).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
+        return requestSpecification;
+
+    }
+
     public static RequestSpecification RequestSpecAuth(Role role){
         RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).addHeader("Authorization",AuthTokenProvider.getAuthToken(role)).setAccept(ContentType.JSON).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
         return requestSpecification;
