@@ -16,7 +16,8 @@ import org.testng.annotations.Test;
 
 public class CountApiTest {
 
-    @Test
+    @Test(description ="Verifying the count api  is giving correct response" ,groups = {"api","regression","smoke"})
+
     public void verifyCountApiTest(){
 
         given().spec(specUtil.RequestSpecAuth(FD))
@@ -33,7 +34,8 @@ public class CountApiTest {
 
     }
 
-    @Test
+    @Test(description ="Verifying the count api giving correct statuccode for invalid token" ,groups = {"api","negative","regression","smoke"})
+
     public void countApiTest_missingAuthToken(){
         given().spec(specUtil.RequestSpec())
                 .when()
