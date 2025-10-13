@@ -39,9 +39,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-        
+    - name : Default value for Execution
+      id: default
+      run : |
+        echo "suite_file={{ github.event.inputs.suite_file || 'testng.xml'}}" >> $GITHUB_OUTPUT
+        echo "suite_file={{ github.event.inputs.env || 'qa'}}" >> $GITHUB_OUTPUT
+      
     - name: Build with Maven
-      run: mvn test -DsuiteXmlFile="${{ github.events.inputs.suite_file }}" -Denv="${{ github.events.inputs.env }}"
+      run: mvn test -DsuiteXmlFile="${{ steps.default.output.suite_file }}" -Denv="${{ steps.default.output.env }}"
 
     - name: Build to Upload Artifact
       if : always()
