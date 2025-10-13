@@ -30,7 +30,7 @@ public class CountApiTest {
                 .body("data.size()",Matchers.equalTo(3))
                 .body("data.count",Matchers.everyItem(Matchers.greaterThanOrEqualTo(0)))
                 .body("data.label",Matchers.everyItem(Matchers.not(Matchers.blankOrNullString())))
-                .body(  matchesJsonSchemaInClasspath("response-schema/CountApiResponseSchema.json"));
+                .body(  matchesJsonSchemaInClasspath("response-schema/countApiResponseSchema.json"));
 
     }
 
