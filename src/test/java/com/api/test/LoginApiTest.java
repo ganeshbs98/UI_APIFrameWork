@@ -1,32 +1,27 @@
 package com.api.test;
-
 import com.api.pojo.UserCredentials;
-import com.api.utils.ConfigManagerOld;
-import com.api.utils.ConfigManager;
-import com.api.utils.specUtil;
-import io.restassured.http.ContentType;
-
+import static com.api.utils.specUtil.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
-
-import io.restassured.response.Response;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.Properties;
-
 import static org.hamcrest.Matchers.*;
-
 import static io.restassured.RestAssured.*;
 
 public class LoginApiTest {
+    UserCredentials userCredentials;
+    @BeforeMethod(description = "Setting up the pre-requisite for Login Api Test")
+    public void setUp(){
+        userCredentials=new UserCredentials("iamfd","password");
+    }
 
-    @Test
+    @Test(description = "Verifying the Login Api is working for Iamfd",groups = {"api","regression","smoke"})
     public void LoginApiTest() {
         UserCredentials userCredentials = new UserCredentials("iamfd", "password");
-         given().spec(specUtil.RequestSpec_withPayload(userCredentials))
+         given().spec(RequestSpec_withPayload(userCredentials))
                 .when()
                 .post("login")
                 .then()
-                .spec(specUtil.ResponseSpec_Ok())
+                .spec(ResponseSpec_Ok())
                 .body("message", equalTo("Success"))
                 .and()
                 .body(matchesJsonSchemaInClasspath("response-schema/loginResponseSchema.json"))

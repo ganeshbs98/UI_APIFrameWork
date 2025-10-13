@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 public class masterApiTest {
 
-    @Test
+    @Test(description ="Verifying the master api giving correct response" ,groups = {"api","regression","smoke"})
     public void VerifyMasterApiTest(){
         given().spec(specUtil.RequestSpecAuth(FD))
                 .when()
@@ -37,7 +37,7 @@ public class masterApiTest {
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/masterApiResponseSchema.json"));
     }
 
-    @Test
+    @Test(description ="Verifying the master api giving correct status code for invalid token" ,groups = {"api","negative","regression","smoke"})
     public void inValid_TokenMasterApiTest(){
         given().spec(specUtil.RequestSpec())
                 .when()
