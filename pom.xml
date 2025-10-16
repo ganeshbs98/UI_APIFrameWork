@@ -68,7 +68,13 @@
             <artifactId>json-flattener</artifactId>
             <version>0.17.3</version>
         </dependency>
-
+        <!--Data driven dependencies-->
+        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.12.0</version>
+        </dependency>
     </dependencies>
 
 </project>
