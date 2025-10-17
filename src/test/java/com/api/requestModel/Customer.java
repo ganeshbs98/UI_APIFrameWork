@@ -1,4 +1,4 @@
-package com.api.pojo;
+package com.api.requestModel;
 
 public record Customer(
         String first_name,

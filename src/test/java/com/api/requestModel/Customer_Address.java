@@ -1,4 +1,4 @@
-package com.api.pojo;
+package com.api.requestModel;
 
 public record Customer_Address(
         String flat_number,

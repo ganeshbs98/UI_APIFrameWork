@@ -1,5 +1,5 @@
 package com.api.test;
-import com.api.pojo.UserCredentials;
+import com.api.requestModel.UserCredentials;
 import static com.api.utils.specUtil.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 import org.testng.annotations.BeforeMethod;

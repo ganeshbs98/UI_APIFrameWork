@@ -4,14 +4,11 @@ import static com.api.constants.Role.FD;
 import static io.restassured.RestAssured.*;
 
 import com.api.constants.*;
-import com.api.pojo.*;
-import com.api.utils.AuthTokenProvider;
-import com.api.utils.ConfigManager;
+import com.api.requestModel.*;
+
 import static com.api.utils.DateTimeUtil.*;
 
-import com.api.utils.DateTimeUtil;
 import com.api.utils.specUtil;
-import io.restassured.http.ContentType;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
@@ -20,7 +17,6 @@ import static org.hamcrest.Matchers.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 

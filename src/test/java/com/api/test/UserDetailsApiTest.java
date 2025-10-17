@@ -1,31 +1,15 @@
 package com.api.test;
 
-import static com.api.utils.DateTimeUtil.getDateTimeWithAgo;
 import static io.restassured.RestAssured.*;
 
 import static com.api.constants.Role.*;
 
-import static  com.api.constants.Role.*;
-
-import static com.api.constants.Role.*;
-
-import com.api.constants.*;
-import com.api.pojo.*;
-import com.api.utils.AuthTokenProvider;
-import com.api.utils.ConfigManager;
+import com.api.requestModel.*;
 import com.api.utils.specUtil;
-import io.restassured.http.ContentType;
-import static org.hamcrest.Matchers.*;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
-import io.restassured.http.Header;
-import io.restassured.response.Response;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserDetailsApiTest {
     private CreateJobPayload createJobPayload;

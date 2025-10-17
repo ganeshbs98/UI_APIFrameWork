@@ -1,14 +1,14 @@
-package com.demo.csv;
+package com.dataProvider.api.bean;
 
-public class UserPojo {
+public class UserBean {
 
     private String Username;
     private String Password;
 
-    public UserPojo(){
+    public UserBean(){
 
     }
-    public UserPojo(String Username, String Password) {
+    public UserBean(String Username, String Password) {
         this.Username = Username;
        this. Password = Password;
     }
@@ -31,7 +31,7 @@ public class UserPojo {
 
     @Override
     public String toString() {
-        return "UserPojo{" +
+        return "UserBean{" +
                 "Username='" + Username + '\'' +
                 ", Password='" + Password + '\'' +
                 '}';
