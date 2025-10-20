@@ -1,4 +1,4 @@
-package com.demo.csv;
+package com.api.pojo;
 
 public class UserPojo {
 
