@@ -2,6 +2,9 @@ package com.api.test;
 import com.api.pojo.UserCredentials;
 import static com.api.utils.specUtil.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
+
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static org.hamcrest.Matchers.*;
@@ -26,5 +29,6 @@ public class LoginApiTest {
                 .and()
                 .body(matchesJsonSchemaInClasspath("response-schema/loginResponseSchema.json"))
                 .body("data.token", notNullValue());
+
     }
 }

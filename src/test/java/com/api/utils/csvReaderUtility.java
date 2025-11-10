@@ -1,6 +1,7 @@
 package com.api.utils;
 
 import com.api.pojo.UserPojo;
+import com.dataproviders.beans.CreateJobBean;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -15,12 +16,14 @@ public class csvReaderUtility {
 
     }
 
-    public static Iterator<UserPojo> loadCsv(String PathforCsvFile){
+    public static <T> Iterator<T> loadCsv(String PathforCsvFile,Class<T> bean){
         InputStream is= Thread.currentThread().getContextClassLoader().getResourceAsStream(PathforCsvFile);
         InputStreamReader isr=new InputStreamReader(is);
         CSVReader csvReader=new CSVReader(isr);
-        CsvToBean<UserPojo> csvToBean=new CsvToBeanBuilder(csvReader).withType(UserPojo.class).withIgnoreEmptyLine(true).build();
-        List<UserPojo> userList=csvToBean.parse();
-        return userList.iterator();
+        CsvToBean<T> csvToBean=new CsvToBeanBuilder(csvReader).withType(bean).withIgnoreEmptyLine(true).build();
+        List<T> List=csvToBean.parse();
+        return List.iterator();
     }
+
+
 }
