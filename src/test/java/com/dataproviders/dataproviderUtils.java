@@ -2,6 +2,7 @@ package com.dataproviders;
 
 import com.api.pojo.CreateJobPayload;
 import com.api.pojo.UserPojo;
+import com.api.utils.FakeDataGenerator;
 import com.api.utils.createJobMapperUtility;
 import com.api.utils.csvReaderUtility;
 import com.dataproviders.beans.CreateJobBean;
@@ -30,6 +31,11 @@ public class dataproviderUtils {
             payloadlist.add(payload);
         }
         return payloadlist.iterator();
+    }
+    @DataProvider(name="CreateJobAPIFakerDataProvider",parallel = true)
+    public static Iterator<CreateJobPayload> creatJobFakerDataProvider(){
+        Iterator<CreateJobPayload>payloadIterator=FakeDataGenerator.generateFakeCreateJobData(10);
+        return payloadIterator;
     }
 
 }
