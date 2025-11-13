@@ -45,10 +45,15 @@ public class FakeDataGenerator {
     }
 
     private static List<Problems> generateFakeProblemList() {
-        int problmId = faker.random().nextInt(VALID_PROBLEM_ID.length);
-        Problems prob = new Problems(VALID_PROBLEM_ID[problmId], faker.lorem().sentence(5));
+        int count= faker.random().nextInt( 3)+1;
         List<Problems> problemList = new ArrayList<>();
-        problemList.add(prob);
+        int problmId=0;
+        Problems prob;
+        for(int i=1;i<=count;i++){
+            problmId = faker.random().nextInt(VALID_PROBLEM_ID.length);
+            prob = new Problems(VALID_PROBLEM_ID[problmId], faker.lorem().sentence(5));
+            problemList.add(prob);
+        }
         return problemList;
     }
 
