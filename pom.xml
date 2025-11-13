@@ -24,6 +24,13 @@
                         <!--suppress UnresolvedMavenProperty -->
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
+                    <systemPropertyVariables>
+                            <!--suppress UnresolvedMavenProperty -->
+                        <env>${env}</env>
+                            <!--suppress UnresolvedMavenProperty -->
+                        <fakerCount>${fakerCount}</fakerCount>
+                    </systemPropertyVariables>
+
                 </configuration>
             </plugin>
         </plugins>

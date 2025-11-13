@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Phoenix Api Test Suite" verbose="1">
+
+    <test name="InWarrenty Flow -Data Driven Test">
+        <classes>
+            <class name="com.api.test.dataDrivenTest.LoginApiDataDrivenTest"/>
+            <class name="com.api.test.dataDrivenTest.createJobApiDataDrivenTest"/>
+            <class name="com.api.test.dataDrivenTest.CreateJobApiTestWithFakerData"/>
+
+        </classes>
+    </test>
+</suite>
