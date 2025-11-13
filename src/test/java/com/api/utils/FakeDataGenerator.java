@@ -17,6 +17,7 @@ public class FakeDataGenerator {
     private static final int MST_OEM_ID = 1;
     private static final int PRODUCT_ID = 1;
     private static final int MST_MODEL_ID = 1;
+    private static final int VALID_PROBLEM_ID[] = {1,2,3,4,5,6,7,8,9,10,11,12,15,16,17,19,20,22,24,26,27,28,29};
 
     private FakeDataGenerator() {
 
@@ -44,8 +45,8 @@ public class FakeDataGenerator {
     }
 
     private static List<Problems> generateFakeProblemList() {
-        int problmId = faker.random().nextInt(27) + 1;
-        Problems prob = new Problems(problmId, faker.lorem().sentence(5));
+        int problmId = faker.random().nextInt(VALID_PROBLEM_ID.length);
+        Problems prob = new Problems(VALID_PROBLEM_ID[problmId], faker.lorem().sentence(5));
         List<Problems> problemList = new ArrayList<>();
         problemList.add(prob);
         return problemList;
