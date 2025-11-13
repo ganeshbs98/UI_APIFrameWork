@@ -1,4 +1,4 @@
-package com.api.test;
+package com.api.test.dataDrivenTest;
 
 import com.api.pojo.CreateJobPayload;
 import com.api.utils.FakeDataGenerator;
@@ -19,7 +19,6 @@ public class CreateJobApiTestWithFakerData {
     @BeforeMethod(description = "creating the creat job api payload")
     public void setUp(){
 //
-
         createJobPayload= FakeDataGenerator.generateFakeCreateJobData();
     }
 

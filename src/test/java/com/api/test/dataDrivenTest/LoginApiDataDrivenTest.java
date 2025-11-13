@@ -1,4 +1,4 @@
-package com.api.dataDrivenTest;
+package com.api.test.dataDrivenTest;
 
 import com.api.pojo.UserCredentials;
 import com.api.pojo.UserPojo;

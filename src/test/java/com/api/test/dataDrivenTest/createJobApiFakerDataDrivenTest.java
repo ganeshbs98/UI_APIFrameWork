@@ -1,4 +1,4 @@
-package com.api.test;
+package com.api.test.dataDrivenTest;
 
 import com.api.pojo.CreateJobPayload;
 import com.api.utils.specUtil;
@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.startsWith;
 
 public class createJobApiFakerDataDrivenTest {
 
-    @Test(description ="Verifying the create Job api is able to create the inwarrenty job" ,groups = {"api","regression","smoke","dataDriven"},dataProviderClass = com.dataproviders.dataproviderUtils.class,dataProvider = "CreateJobAPIFakerDataProvider")
+    @Test(description ="Verifying the create Job api is able to create the inwarrenty job" ,groups = {"api","regression","smoke","dataDriven","faker"},dataProviderClass = com.dataproviders.dataproviderUtils.class,dataProvider = "CreateJobAPIFakerDataProvider")
 
     public void createJobApiTest(CreateJobPayload createJobPayload) {
 
