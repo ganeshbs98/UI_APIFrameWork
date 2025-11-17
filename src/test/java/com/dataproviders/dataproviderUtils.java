@@ -45,5 +45,9 @@ public class dataproviderUtils {
     public static Iterator<UserCredentials> LoginApiJsonDataProvider(){
         return JsonReaderUtility.jsonUtility("testData/LoginApiJsonData.json", UserCredentials[].class);
     }
+    @DataProvider(name="CreateJobAPiJsonDataProvider",parallel = true)
+    public static Iterator<CreateJobPayload> CreateJobAPiJsonDataProvider(){
+        return JsonReaderUtility.jsonUtility("testData/CreateJobApi.json", CreateJobPayload[].class);
+    }
 
 }
