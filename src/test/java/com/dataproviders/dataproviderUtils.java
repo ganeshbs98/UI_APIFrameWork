@@ -1,8 +1,9 @@
 package com.dataproviders;
 
 import com.api.pojo.CreateJobPayload;
-import com.api.pojo.UserPojo;
+import com.api.pojo.UserCredentials;
 import com.api.utils.FakeDataGenerator;
+import com.api.utils.JsonReaderUtility;
 import com.api.utils.createJobMapperUtility;
 import com.api.utils.csvReaderUtility;
 import com.dataproviders.beans.CreateJobBean;
@@ -38,6 +39,11 @@ public class dataproviderUtils {
         int FakerCountInt=Integer.parseInt(FakerCount);
         Iterator<CreateJobPayload>payloadIterator=FakeDataGenerator.generateFakeCreateJobData(FakerCountInt);
         return payloadIterator;
+    }
+
+    @DataProvider(name="LoginApiJsonDataProvider",parallel = true)
+    public static Iterator<UserCredentials> LoginApiJsonDataProvider(){
+        return JsonReaderUtility.jsonUtility("testData/LoginApiJsonData.json", UserCredentials[].class);
     }
 
 }
