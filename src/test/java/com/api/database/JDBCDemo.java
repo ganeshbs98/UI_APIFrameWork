@@ -18,6 +18,7 @@ public class JDBCDemo {
                     String mobileNumber=resultSet.getString("mobile_number");
                     System.out.println("First Name: "+firstName+"| Last Name: "+lastName+"| Mobile Number: "+mobileNumber);
               }
+              conn.close();
            }
         }catch (SQLException e){
             e.printStackTrace();
