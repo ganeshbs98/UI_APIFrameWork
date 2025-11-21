@@ -41,6 +41,9 @@ public class ConfigManager {
     public static Properties loadProperties() {
         return prop;
     }
+    public static String getProperty(String key){
+        return prop.getProperty(key);
+    }
 //    public static String loadProperties(String PropKey) {
 //        return prop.getProperty(PropKey.toUpperCase());
 //    }
