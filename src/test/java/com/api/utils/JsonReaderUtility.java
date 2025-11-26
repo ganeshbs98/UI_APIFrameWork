@@ -1,7 +1,6 @@
 package com.api.utils;
 
 
-import com.api.pojo.UserCredentials;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;

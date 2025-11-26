@@ -46,7 +46,7 @@ public class DataBaseManager {
                 }
             }
         }
-        System.out.println(conn);
+//        System.out.println(conn);
 
 
     }
@@ -59,7 +59,7 @@ public class DataBaseManager {
         }
 
         conn=hikariDataSource.getConnection();
-        System.out.println(conn);
+//        System.out.println(conn);
 
         return  conn;
     }

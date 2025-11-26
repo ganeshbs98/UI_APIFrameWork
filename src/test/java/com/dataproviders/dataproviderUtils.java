@@ -6,6 +6,7 @@ import com.api.utils.FakeDataGenerator;
 import com.api.utils.JsonReaderUtility;
 import com.api.utils.createJobMapperUtility;
 import com.api.utils.csvReaderUtility;
+import com.database.dao.createJobPayloadDataDao;
 import com.dataproviders.beans.CreateJobBean;
 import com.dataproviders.beans.UserBean;
 import org.testng.annotations.DataProvider;
@@ -48,6 +49,16 @@ public class dataproviderUtils {
     @DataProvider(name="CreateJobAPiJsonDataProvider",parallel = true)
     public static Iterator<CreateJobPayload> CreateJobAPiJsonDataProvider(){
         return JsonReaderUtility.jsonUtility("testData/CreateJobApi.json", CreateJobPayload[].class);
+    }
+    @DataProvider(name="CreateJobAPiDataBaseDataProvider",parallel = true)
+    public static Iterator<CreateJobPayload> CreateJobAPiDataBaseDataProvider(){
+        List<CreateJobBean> list= createJobPayloadDataDao.getCreateJobPayloadData();
+        List<CreateJobPayload>payloadList=new ArrayList<>();
+        for (CreateJobBean bean:list){
+            CreateJobPayload payload=createJobMapperUtility.mapper(bean);
+            payloadList.add(payload);
+        }
+        return payloadList.iterator();
     }
 
 }
