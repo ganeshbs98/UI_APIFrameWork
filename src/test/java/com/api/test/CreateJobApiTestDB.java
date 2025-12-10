@@ -6,9 +6,11 @@ import com.api.utils.specUtil;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
 import com.database.dao.CustomerProductDao;
+import com.database.dao.MapJobProblemDao;
 import com.database.model.CustomerAddressModel;
 import com.database.model.CustomerModel;
 import com.database.model.CustomerProductModel;
+import com.database.model.MapJobProblemModel;
 import com.database.reponse.model.CreateJobReponseModel;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -32,14 +34,15 @@ public class CreateJobApiTestDB {
    private Customer customer;
    private Customer_Address customer_address;
    private Customer_Product customerProduct;
+   private Problems problems;
 
     @BeforeMethod(description = "creating the creat job api payload")
     public void setUp(){
        customer = new Customer("Denis", "Boyer", "986-350-8890", "9823984974", "abc@gmail.com", "abc2@gmail.com");
         System.out.println(customer.first_name());
          customer_address = new Customer_Address("c 304", "Jupiter", "MG road", "Bangur Nagar", "Goregaon West", "411039", "India", "Maharashtra");
-         customerProduct = new Customer_Product(getDateTimeWithAgo(10), "26889445989447", "26889445989447", "26889445989447", getDateTimeWithAgo(10), Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
-        Problems problems = new Problems(Problem.SMARTPHONE_IS_RUNNING_SLOW.getCode(), "Battery Issue");
+         customerProduct = new Customer_Product(getDateTimeWithAgo(10), "26884545989447", "26884545989447", "26884545989447", getDateTimeWithAgo(10), Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
+         problems = new Problems(Problem.SMARTPHONE_IS_RUNNING_SLOW.getCode(), "Battery Issue");
         List<Problems> problemsList = new ArrayList<>();
         problemsList.add(problems);
         createJobPayload = new CreateJobPayload(Service_Location.SERVICE_LOCATION_A.getCode(), Platform.FRONT_DESK.getCode(), Warrenty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer, customer_address, customerProduct, problemsList);
@@ -79,6 +82,13 @@ public class CreateJobApiTestDB {
         Assert.assertEquals(customer_address.state(),customerAddressModel.getState());
         System.out.println("------------------Customer Address Validation Completed-------------------");
         CustomerProductModel customerProductModel= CustomerProductDao.getCustomerProductInfo(createJobReponseModel.getData().getTr_customer_product_id());
+
+        int tr_job_head_id=createJobReponseModel.getData().getId();
+        MapJobProblemModel mapJobProblemModel= MapJobProblemDao.getProblemsDetails(tr_job_head_id);
+        System.out.println("------------------Job Problem Validation -------------------");
+        Assert.assertEquals(mapJobProblemModel.getMst_problem_id(),createJobPayload.problems().get(0).id());
+        Assert.assertEquals(mapJobProblemModel.getRemark(),createJobPayload.problems().get(0).remark());
+        System.out.println("------------------Job Problem Validation Completed-------------------");
         System.out.println("------------------Customer Product Validation -------------------");
         Assert.assertEquals(customerProduct.dop(),customerProductModel.getDop());
         Assert.assertEquals(customerProduct.imei1(),customerProductModel.getImei1());
