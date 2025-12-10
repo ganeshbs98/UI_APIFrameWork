@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class MapJobProblemDao {
     private static final String PROBLEM_QUERY = """
-            select * from tr_map_job_problem where tr_job_head_id=?
+            select * from map_job_problem  WHERE tr_job_head_id =?
             """;
 
     private MapJobProblemDao() {
