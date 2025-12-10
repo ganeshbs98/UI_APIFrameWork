@@ -27,6 +27,7 @@ public class DataBaseManager {
 
     }
 
+
     private static void instanciatePool() {
         if(hikariDataSource==null){//First check which all the parallel thread will enter
             synchronized(DataBaseManager.class){
