@@ -1,6 +1,7 @@
 package com.api.database;
 
 import com.api.utils.ConfigManager;
+import com.api.utils.EnvUtil;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -13,9 +14,9 @@ public class DataBaseManager {
     private static HikariConfig hikariConfig;
     private volatile static HikariDataSource hikariDataSource;
 
-    private static final String DB_URL= ConfigManager.getProperty("DB_URL");
-    private static final String DB_USER= ConfigManager.getProperty("DB_USER");
-    private static final String DB_PASSWORD= ConfigManager.getProperty("DB_PASSWORD");
+    private static final String DB_URL= EnvUtil.getEnvValue("DB_URL");
+    private static final String DB_USER= EnvUtil.getEnvValue("DB_USER");
+    private static final String DB_PASSWORD= EnvUtil.getEnvValue("DB_PASSWORD");
     private static final int MAXIMUM_POOL_SIZE= Integer.parseInt(ConfigManager.getProperty("MAXIMUM_POOL_SIZE"));
     private static final int MINIMUM_IDLE= Integer.parseInt(ConfigManager.getProperty("MINIMUM_IDLE"));
     private static final int CONNECTION_TIMEOUT_IN_SEC= Integer.parseInt(ConfigManager.getProperty("CONNECTION_TIMEOUT_IN_SEC"));
