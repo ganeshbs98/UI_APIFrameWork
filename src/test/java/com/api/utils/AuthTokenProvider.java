@@ -1,16 +1,11 @@
 package com.api.utils;
 
 import static com.api.constants.Role.*;
-
 import com.api.constants.Role;
 import com.api.pojo.UserCredentials;
 import io.restassured.http.ContentType;
-
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
 import static org.hamcrest.Matchers.*;
 
 import static io.restassured.RestAssured.*;
