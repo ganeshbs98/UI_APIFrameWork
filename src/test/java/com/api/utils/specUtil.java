@@ -16,7 +16,9 @@ public class specUtil {
         RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).setAccept(ContentType.JSON).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
         return requestSpecification;
     }
-
+    public static RequestSpecification ResquestSpecWithQueryParams(String paramKey,String paramValue) {
+         return new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).setAccept(ContentType.JSON).addQueryParam(paramKey,paramValue).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
+    }
     //POST,PUT,PATCH
     public static RequestSpecification RequestSpec_withPayload(Object userCredentials) {
         RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(userCredentials).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();

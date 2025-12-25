@@ -2,10 +2,7 @@ package com.dataproviders;
 
 import com.api.pojo.CreateJobPayload;
 import com.api.pojo.UserCredentials;
-import com.api.utils.FakeDataGenerator;
-import com.api.utils.JsonReaderUtility;
-import com.api.utils.createJobMapperUtility;
-import com.api.utils.csvReaderUtility;
+import com.api.utils.*;
 import com.database.dao.createJobPayloadDataDao;
 import com.dataproviders.beans.CreateJobBean;
 import com.dataproviders.beans.UserBean;
@@ -50,6 +47,14 @@ public class dataproviderUtils {
     public static Iterator<CreateJobPayload> CreateJobAPiJsonDataProvider(){
         return JsonReaderUtility.jsonUtility("testData/CreateJobApi.json", CreateJobPayload[].class);
     }
+
+    @DataProvider(name="CreateJobAPiExcelDataProvider",parallel = true)
+    public static Iterator<UserCredentials> CreateJobAPiExcelDataProvider(){
+        return ExcelUtil.LoadExcelTestData();
+    }
+
+
+
     @DataProvider(name="CreateJobAPiDataBaseDataProvider",parallel = true)
     public static Iterator<CreateJobPayload> CreateJobAPiDataBaseDataProvider(){
         List<CreateJobBean> list= createJobPayloadDataDao.getCreateJobPayloadData();
