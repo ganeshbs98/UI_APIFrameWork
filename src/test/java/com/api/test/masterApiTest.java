@@ -4,6 +4,7 @@ import static com.api.constants.Role.FD;
 import static io.restassured.RestAssured.*;
 
 import com.api.constants.Role;
+import com.api.services.MasterService;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
 import com.api.utils.specUtil;
@@ -11,15 +12,21 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import static org.hamcrest.Matchers.*;
 
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class masterApiTest {
 
+    private MasterService masterService;
+
+    @BeforeMethod(description = "Instantiating the Master Service class before running the test cases")
+    public void setup(){
+        masterService= new MasterService();
+    }
+
     @Test(description ="Verifying the master api giving correct response" ,groups = {"api","regression","smoke"})
     public void VerifyMasterApiTest(){
-        given().spec(specUtil.RequestSpecAuth(FD))
-                .when()
-                .post("master")
+        masterService.getMasterData(FD)
                 .then()
                 .spec(specUtil.ResponseSpec_Ok())
                 .body("message",equalTo("Success"))
