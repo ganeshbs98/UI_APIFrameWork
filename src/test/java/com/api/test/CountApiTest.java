@@ -6,23 +6,28 @@ import static org.hamcrest.Matchers.*;
 
 import com.api.constants.Role;
 import static com.api.utils.AuthTokenProvider.*;
+
+import com.api.services.DashBoardService;
 import com.api.utils.ConfigManager;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 import com.api.utils.specUtil;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class CountApiTest {
+    DashBoardService dashBoardService;
+    @BeforeMethod()
+    public void setup(){
+        dashBoardService= new DashBoardService();
+    }
 
     @Test(description ="Verifying the count api  is giving correct response" ,groups = {"api","regression","smoke"})
 
     public void verifyCountApiTest(){
-
-        given().spec(specUtil.RequestSpecAuth(FD))
-                .when()
-                .get("/dashboard/count")
+        dashBoardService.getCount(FD)
                 .then()
                 .spec(specUtil.ResponseSpec_Ok())
                 .body("message", Matchers.equalTo("Success"))
@@ -37,9 +42,7 @@ public class CountApiTest {
     @Test(description ="Verifying the count api giving correct statuccode for invalid token" ,groups = {"api","negative","regression","smoke"})
 
     public void countApiTest_missingAuthToken(){
-        given().spec(specUtil.RequestSpec())
-                .when()
-                .get("/dashboard/count")
+        dashBoardService.countWithNoAuth()
                 .then()
                 .spec(specUtil.ResponseSpec_Text(401));
     }
