@@ -11,6 +11,7 @@ import static com.api.constants.Role.*;
 
 import com.api.constants.*;
 import com.api.pojo.*;
+import com.api.services.DashBoardService;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
 import com.api.utils.specUtil;
@@ -29,7 +30,7 @@ import java.util.List;
 
 public class UserDetailsApiTest {
     private CreateJobPayload createJobPayload;
-
+    private DashBoardService dashBoardService;
 
 
 
