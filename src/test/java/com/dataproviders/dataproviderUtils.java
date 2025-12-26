@@ -53,6 +53,11 @@ public class dataproviderUtils {
         return ExcelUtil.LoadExcelTestData();
     }
 
+    @DataProvider(name="CreateJobAPiExcelDataProviderWithPoiji",parallel = true)
+    public static Iterator<UserBean> CreateJobAPiExcelDataProviderWithPoiji(){
+        return ExcelUtilwithPoiji.LoadExcelTestData("testData/ExcelUtil.xlsx", UserBean.class,"LoginTestData");
+    }
+
 
 
     @DataProvider(name="CreateJobAPiDataBaseDataProvider",parallel = true)
