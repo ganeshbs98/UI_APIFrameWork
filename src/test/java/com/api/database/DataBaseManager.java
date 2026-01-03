@@ -2,12 +2,17 @@ package com.api.database;
 
 import com.api.utils.ConfigManager;
 import com.api.utils.EnvUtil;
+import com.api.utils.HikariCpDemo;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 
 public class DataBaseManager {
+    private static final Logger logger= LogManager.getLogger(DataBaseManager.class);
+
     private volatile static Connection conn;// Any update happen to this variable all the Threads will be aware of it.
     private static Statement statement;
     private static ResultSet resultSet;
@@ -30,9 +35,13 @@ public class DataBaseManager {
 
 
     private static void instanciatePool() {
+        logger.info("Instanciating the HikariCP Connection Pool");
         if(hikariDataSource==null){//First check which all the parallel thread will enter
+            logger.info("HikariCP DataSource is null, creating the connection pool");
             synchronized(DataBaseManager.class){
-                if(hikariDataSource==null){//only one thread will enter here and the connection will be created
+                logger.info("Inside the synchronized block for DataBaseManager class");
+                if(hikariDataSource==null){
+                    logger.info("only one thread will enter here and the connection will be created");
                     hikariConfig=new HikariConfig();
                     hikariConfig.setJdbcUrl("jdbc:mysql:"+DB_URL);
                     hikariConfig.setUsername(DB_USER);
@@ -57,12 +66,13 @@ public class DataBaseManager {
         if(hikariDataSource==null){
             instanciatePool();
         }else if(hikariDataSource.isClosed()){
+            logger.error("HikariCP DataSource is closed");
             throw new SQLException("HikariCP DataSource is closed");
         }
 
         conn=hikariDataSource.getConnection();
 //        System.out.println(conn);
-
+        logger.info("Connection established successfully using HikariCP: "+conn);
         return  conn;
     }
 }

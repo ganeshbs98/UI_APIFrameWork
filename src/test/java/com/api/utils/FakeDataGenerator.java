@@ -2,12 +2,15 @@ package com.api.utils;
 
 import com.api.pojo.*;
 import com.github.javafaker.Faker;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class FakeDataGenerator {
+    private static final Logger logger= LogManager.getLogger(FakeDataGenerator.class);
 
     private static Faker faker = new Faker();
     private static final String COUNTRY = "India";
@@ -24,6 +27,7 @@ public class FakeDataGenerator {
     }
 
     public static CreateJobPayload generateFakeCreateJobData() {
+        logger.info("Generating fake CreateJobPayload data");
         Customer customer = generateFakeCustomerData();
         Customer_Address customerAddress = generateFakeCustomerAddressData();
         Customer_Product customerProduct = generateFakeCustomerProductData();
@@ -32,7 +36,7 @@ public class FakeDataGenerator {
         return createJobPayload;
     }
     public static Iterator<CreateJobPayload> generateFakeCreateJobData(int count) {
-
+        logger.info("Generating the fake data for count:"+count);
         List<CreateJobPayload> payloadList=new ArrayList<>();
         for(int i=1;i<=count;i++) {
             Customer customer = generateFakeCustomerData();
@@ -46,6 +50,7 @@ public class FakeDataGenerator {
     }
 
     private static List<Problems> generateFakeProblemList() {
+        logger.info("Generating fake Problems list");
         int count= faker.random().nextInt( 3)+1;
         List<Problems> problemList = new ArrayList<>();
         int problmId=0;
@@ -59,6 +64,7 @@ public class FakeDataGenerator {
     }
 
     private static Customer_Product generateFakeCustomerProductData() {
+        logger.info("Generating fake Customer_Product data");
         String dop = DateTimeUtil.getDateTimeWithAgo(10);
         String imei = faker.numerify("###############");
         String popurl = faker.internet().url();
@@ -67,6 +73,7 @@ public class FakeDataGenerator {
     }
 
     private static Customer_Address generateFakeCustomerAddressData() {
+        logger.info("Generating fake Customer_Address data");
         String FlatNo = faker.numerify("###");
         String apartment = faker.address().streetName();
         String streetName = faker.address().streetName();
@@ -81,6 +88,7 @@ public class FakeDataGenerator {
     }
 
     private static Customer generateFakeCustomerData() {
+        logger.info("Generating fake Customer data");
         String fName = faker.name().firstName();
         String lName = faker.name().lastName();
         String PNumber = faker.numerify("959#######");

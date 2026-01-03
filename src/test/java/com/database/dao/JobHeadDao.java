@@ -2,6 +2,8 @@ package com.database.dao;
 
 import com.api.database.DataBaseManager;
 import com.database.model.JobHeadModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class JobHeadDao {
+    private static final Logger logger= LogManager.getLogger(JobHeadDao.class);
 
     private static final String JOB_HEAD_QUERY = """
             select * from tr_job_head where tr_customer_id=?
@@ -27,7 +30,9 @@ public class JobHeadDao {
             conn= DataBaseManager.getConnection();
             pState=conn.prepareStatement(JOB_HEAD_QUERY);
             pState.setInt(1,tr_customer_id);
+            logger.info("Executing query to fetch job head details for customer ID: " + tr_customer_id);
             rSet=pState.executeQuery();
+            logger.info("Processing result set for job head details");
             while(rSet.next()){
                 jobHeadModel=new JobHeadModel(
                         rSet.getInt("id"),
