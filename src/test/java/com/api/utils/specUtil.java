@@ -1,6 +1,7 @@
 package com.api.utils;
 
 import com.api.constants.Role;
+import com.api.filters.SensitiveDataFilter;
 import com.api.pojo.UserCredentials;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -31,7 +32,7 @@ public class specUtil {
     //POST,PUT,PATCH
     public static RequestSpecification RequestSpec_withPayload(Object userCredentials) {
         logger.info("Creating request with payload");
-        RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(userCredentials).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
+        RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).setAccept(ContentType.JSON).addFilter(new SensitiveDataFilter()).setBody(userCredentials).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
         return requestSpecification;
 
     }
