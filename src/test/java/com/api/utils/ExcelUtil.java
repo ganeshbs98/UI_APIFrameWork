@@ -1,6 +1,8 @@
 package com.api.utils;
 
 import com.api.pojo.UserCredentials;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -15,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExcelUtil {
+    private static final Logger logger= LogManager.getLogger(ExcelUtil.class);
 
     private ExcelUtil() {
 
@@ -22,6 +25,7 @@ public class ExcelUtil {
 
     public static Iterator<UserCredentials> LoadExcelTestData()  {
         List<UserCredentials> dataList = new ArrayList<>();
+        logger.info("Loading test data from Excel file");
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("testData/ExcelUtil.xlsx");
         XSSFWorkbook xssfbook = null;
         try {
@@ -56,6 +60,7 @@ public class ExcelUtil {
             }
 
         }
+
         return dataList.iterator();
 
 

@@ -2,16 +2,20 @@ package com.api.utils;
 
 import com.api.pojo.*;
 import com.dataproviders.beans.CreateJobBean;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class createJobMapperUtility {
+    private static final Logger logger=LogManager.getLogger(createJobMapperUtility.class);
     private createJobMapperUtility() {
 
     }
 
     public static CreateJobPayload mapper(CreateJobBean bean) {
+        logger.info("Create job bean to create job payload mapping is started:");
         int mst_service_location_id = Integer.parseInt(bean.getMst_service_location_id());
         int Mst_platform_id = Integer.parseInt(bean.getMst_platform_id());
         int Mst_warrenty_status_id = Integer.parseInt(bean.getMst_warrenty_status_id());
@@ -39,6 +43,7 @@ public class createJobMapperUtility {
                 problemsList
 
         );
+        logger.info("Create job payload mapping is completed:",Payload);
         return Payload;
 
     }

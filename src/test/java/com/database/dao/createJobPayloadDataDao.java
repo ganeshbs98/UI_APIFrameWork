@@ -1,7 +1,10 @@
 package com.database.dao;
 
 import com.api.database.DataBaseManager;
+import com.api.utils.JsonReaderUtility;
 import com.dataproviders.beans.CreateJobBean;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.Connection;
@@ -12,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class createJobPayloadDataDao {
+    private static final Logger logger= LogManager.getLogger(createJobPayloadDataDao.class);
 
 
     private static final String SQL_QUERY = """
@@ -53,16 +57,20 @@ public class createJobPayloadDataDao {
             """;
 
     public static List<CreateJobBean> getCreateJobPayloadData(){
-        System.out.println();
+        logger.info("Fetching CreateJobPayload data from database");
         Connection conn=null;
         Statement stat=null;
         ResultSet result_set=null;
         List<CreateJobBean> beanList=new ArrayList<>();
         CreateJobBean bean=new CreateJobBean();
         try{
+            logger.info("Establishing database connection");
             conn=DataBaseManager.getConnection();
+            logger.info("Executing SQL Query to fetch CreateJobPayload data");
              stat=conn.createStatement();
+
             result_set=stat.executeQuery(SQL_QUERY);
+            logger.info("Processing the result set and mapping to CreateJobBean objects");
             while (result_set.next()){
                 bean.setMst_service_location_id(result_set.getString("mst_service_location_id"));
                 bean.setMst_platform_id(result_set.getString("mst_platform_id"));

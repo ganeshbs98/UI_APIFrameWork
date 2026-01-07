@@ -3,6 +3,8 @@ package com.api.utils;
 import com.api.pojo.UserCredentials;
 import com.dataproviders.beans.UserBean;
 import com.poiji.bind.Poiji;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -17,12 +19,15 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExcelUtilwithPoiji {
+    private static final Logger logger= LogManager.getLogger(ExcelUtilwithPoiji.class);
+
 
     private ExcelUtilwithPoiji() {
 
     }
 
     public static <T>Iterator<T> LoadExcelTestData(String fileName,Class<T> clazz,String sheetname) {
+        logger.info("Loading test data from Excel file:",fileName);
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
         XSSFWorkbook xssfbook = null;
         try {
@@ -38,7 +43,9 @@ public class ExcelUtilwithPoiji {
         List<T> datalist;
 //        String name = xssfbook.getSheetName(0);
         XSSFSheet mySheet=xssfbook.getSheet(sheetname);
+        logger.info("Converting the exceldata to POJO class objects",clazz,sheetname);
         datalist = Poiji.fromExcel(mySheet, clazz);
+        logger.info("Total records loaded: "+datalist.size());
         return datalist.iterator();
 
     }

@@ -1,10 +1,15 @@
 package com.api.utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.concurrent.locks.Condition;
 
 public class ConfigManager {
+    private static final Logger logger= LogManager.getLogger(ConfigManager.class);
     private static Properties prop = new Properties();
     private static String path = "config.properties";
     private static String env;
@@ -14,9 +19,14 @@ public class ConfigManager {
     }
 
     static {
-        env = System.getProperty("env","qa");
+        logger.info("Reading the env value passed from terminal");
+        System.getProperty("env");
+        if(System.getProperty("env")==null){
+            logger.warn("No env value is set...., hence defaulting to QA env");
+            env = System.getProperty("env","qa");
+        }
         env=env.toLowerCase().trim();
-        System.out.println("Running in Environment: "+env);
+        logger.info("Running in Environment: "+env);
         switch (env) {
             case "qa" -> path = "config.qa.properties";
 
@@ -26,14 +36,17 @@ public class ConfigManager {
 
             default -> path = "config.properties";
         }
+        logger.info("Loading the property file: "+path);
         InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
 
         if (input == null) {
+            logger.error("properites file not found in given filepath");
             throw new RuntimeException("Unable to find config.properties file");
         }
         try {
             prop.load(input);
         } catch (IOException e) {
+            logger.error("Cannot find the file in given filepath");
             throw new RuntimeException(e);
         }
     }
@@ -42,6 +55,7 @@ public class ConfigManager {
         return prop;
     }
     public static String getProperty(String key){
+        logger.info("Fetching the value for the key from properties file: "+key);
         return prop.getProperty(key);
     }
 //    public static String loadProperties(String PropKey) {

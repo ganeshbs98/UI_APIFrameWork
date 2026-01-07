@@ -2,10 +2,13 @@ package com.database.dao;
 
 import com.api.database.DataBaseManager;
 import com.database.model.CustomerModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 
 public class CustomerDao {
+    private static final Logger logger= LogManager.getLogger(CustomerDao.class);
 
     //Executing the query for tr_customer table! which  will get details of the customer
 
@@ -24,10 +27,10 @@ public class CustomerDao {
             conn = DataBaseManager.getConnection();
             System.out.println(conn);
             pstate = conn.prepareStatement(CUSTOMER_DETAILS_QUERY);
-            System.out.println(pstate);
+            logger.info("Executing query to fetch customer details for customer ID: " + customerId);
             pstate.setInt(1, customerId);
             ResultSet res = pstate.executeQuery();
-
+            logger.info("Processing result set for customer details");
             while (res.next()) {
                 customer = new CustomerModel(
                         res.getInt("id"),

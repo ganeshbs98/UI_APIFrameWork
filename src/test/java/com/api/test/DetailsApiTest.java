@@ -3,6 +3,8 @@ package com.api.test;
 import com.api.pojo.Details;
 import com.api.services.DashBoardService;
 import com.api.utils.specUtil;
+
+import static com.api.constants.Role.FD;
 import static org.hamcrest.Matchers.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,7 +21,7 @@ public class DetailsApiTest {
 
     @Test
     public void verifyDetailsApiTest(){
-        dashBoardService.details(com.api.constants.Role.FD,details)
+        dashBoardService.details(FD,details)
                 .then()
                 .spec(specUtil.ResponseSpec_Ok())
                 .body("message", equalTo("Success"));
