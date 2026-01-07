@@ -1,6 +1,12 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Phoenix Api Test Suite" verbose="1">
+<suite name="Phoenix Api Test Suite" >
+
+    <listeners>
+        <listener class-name="com.Listeners.ApiTestListener"/>
+    </listeners>
+
+
 
     <test name="InWarrenty Flow Test">
         <classes>
