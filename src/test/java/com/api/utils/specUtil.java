@@ -11,6 +11,9 @@ import io.restassured.specification.ResponseSpecification;
 import org.hamcrest.Matchers;
 
 public class specUtil {
+    private specUtil(){
+
+    }
     //GET,DELETE
     public static RequestSpecification RequestSpec() {
         RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).setAccept(ContentType.JSON).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
