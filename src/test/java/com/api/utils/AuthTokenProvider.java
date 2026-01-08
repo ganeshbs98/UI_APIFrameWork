@@ -38,7 +38,7 @@ public class AuthTokenProvider {
 
         }
         logger.info("Fetching the token from the API for the role: with the endpoint",role);
-        String token = given().baseUri(ConfigManager.loadProperties().getProperty("URI")).contentType(ContentType.JSON).body(userCredentials).when().post(LOGIN_ENDPOINT).then().log().ifValidationFails().body("message", equalTo("Success")).extract().body().jsonPath().getString("data.token");
+        String token = given().spec(specUtil.RequestSpec_withPayload(userCredentials)).when().post(LOGIN_ENDPOINT).then().log().ifValidationFails().body("message", equalTo("Success")).extract().body().jsonPath().getString("data.token");
         logger.info("Token is cached for the Future use for the role:",role);
         tokenCache.put(role, token);
         return token;
