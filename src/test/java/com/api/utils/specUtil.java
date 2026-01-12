@@ -24,33 +24,33 @@ public class specUtil {
     //GET,DELETE
     public static RequestSpecification RequestSpec() {
         logger.info("Building the request specification with base URI and content type JSON");
-        RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).setAccept(ContentType.JSON).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).build();
+        RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).setAccept(ContentType.JSON).addFilter(new SensitiveDataFilter()).build();
         return requestSpecification;
     }
 
     public static RequestSpecification ResquestSpecWithQueryParams(String paramKey, String paramValue) {
         logger.info("Building the request specification with base URI , content type JSON and query params");
-        return new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).setAccept(ContentType.JSON).addQueryParam(paramKey, paramValue).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).build();
+        return new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).setAccept(ContentType.JSON).addQueryParam(paramKey, paramValue).build();
     }
 
     //POST,PUT,PATCH
     public static RequestSpecification RequestSpec_withPayload(Object userCredentials) {
         logger.info("Creating request with payload");
-        RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).addFilter(new SensitiveDataFilter()).setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(userCredentials).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).build();
+        RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).addFilter(new SensitiveDataFilter()).setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(userCredentials).build();
         return requestSpecification;
 
     }
 
     public static RequestSpecification RequestSpec_withHeader_Payload(Role role, Object userCredentials) {
         logger.info("Creating request with header and payload");
-        RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).addHeader("Authorization", AuthTokenProvider.getAuthToken(role)).addFilter(new SensitiveDataFilter()).setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(userCredentials).log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).build();
+        RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).addHeader("Authorization", AuthTokenProvider.getAuthToken(role)).addFilter(new SensitiveDataFilter()).setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(userCredentials).build();
         return requestSpecification;
 
     }
 
     public static RequestSpecification RequestSpecAuth(Role role) {
         logger.info("Creating request with auth header");
-        RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).addHeader("Authorization", AuthTokenProvider.getAuthToken(role)).setAccept(ContentType.JSON).log(LogDetail.URI).log(LogDetail.METHOD).build();
+        RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(ConfigManager.loadProperties().getProperty("URI")).setContentType(ContentType.JSON).addHeader("Authorization", AuthTokenProvider.getAuthToken(role)).setAccept(ContentType.JSON).build();
         return requestSpecification;
 
     }
