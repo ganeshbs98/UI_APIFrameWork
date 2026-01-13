@@ -12,7 +12,7 @@ public class ConfigManager {
     private static final Logger logger= LogManager.getLogger(ConfigManager.class);
     private static Properties prop = new Properties();
     private static String path = "config.properties";
-    private static String env;
+    public static String env;
 
     private ConfigManager() {
 
@@ -20,11 +20,11 @@ public class ConfigManager {
 
     static {
         logger.info("Reading the env value passed from terminal");
-        System.getProperty("env");
         if(System.getProperty("env")==null){
             logger.warn("No env value is set...., hence defaulting to QA env");
             env = System.getProperty("env","qa");
         }
+        env = System.getProperty("env","qa");
         env=env.toLowerCase().trim();
         logger.info("Running in Environment: "+env);
         switch (env) {

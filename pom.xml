@@ -16,6 +16,11 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.12.0</version>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.4</version>
@@ -29,6 +34,7 @@
                         <env>${env}</env>
                             <!--suppress UnresolvedMavenProperty -->
                         <fakerCount>${fakerCount}</fakerCount>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
 
                 </configuration>
@@ -148,6 +154,16 @@
             <artifactId>log4j-slf4j2-impl</artifactId>
             <version>2.25.3</version>
         </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.32.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+
     </dependencies>
 
 
