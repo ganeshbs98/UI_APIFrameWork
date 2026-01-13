@@ -12,7 +12,7 @@ public class ConfigManager {
     private static final Logger logger= LogManager.getLogger(ConfigManager.class);
     private static Properties prop = new Properties();
     private static String path = "config.properties";
-    private static String env;
+    public static String env;
 
     private ConfigManager() {
 
