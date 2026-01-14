@@ -1,8 +1,10 @@
 package com.Listeners;
 
+import com.api.utils.AllureEnvWritterUtility;
 import com.mysql.cj.conf.url.ReplicationDnsSrvConnectionUrl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.xmlbeans.impl.xb.xsdschema.NamedGroup;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -49,6 +51,7 @@ public class ApiTestListener implements ITestListener {
     public void onStart(ITestContext context) {
         logger.info("***********************");
         logger.info("**********Test Suite Started:**********");
+        AllureEnvWritterUtility.createENvFileForAllureReports();
 
     }
 
