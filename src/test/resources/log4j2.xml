@@ -3,7 +3,6 @@
         <console name="CONSOLE" target="SYSTEM_OUT">
             <PatternLayout pattern="%highlight{[%d{DD-MM-YYYY HH:mm:ss}][%t][%5level]-[%c{1}::%M:%L] - %msg:%n}{FATAL=Red Bright, ERROR=red,
             WARN=Cyan Bright, INFO=Magenta Bright, DEBUG=green, TRACE=blue}"></PatternLayout>
-        </console>
 <!--        <File name="logs/automation" append="false"></File>-->
         <File name="FileAppender" filename="Logs/Application.log" appende="true">
             <PatternLayout pattern="%highlight{[%d{DD-MM-YYYY HH:mm:ss}][%t][%5level]-[%c{1}::M:%L] - %msg:%n}{FATAL=Red Bright, ERROR=red,
