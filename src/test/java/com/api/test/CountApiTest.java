@@ -12,17 +12,24 @@ import com.api.utils.ConfigManager;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 import com.api.utils.specUtil;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
+@Epic("Job Management")
+@Feature("Count API Tests")
 public class CountApiTest {
     DashBoardService dashBoardService;
     @BeforeMethod()
     public void setup(){
         dashBoardService= new DashBoardService();
     }
+
+
+    @Story("Verify Count API response")
+    @Description("Test to verify that the Count API returns the correct counts for various labels and adheres to the expected JSON schema.")
+    @Severity(SeverityLevel.NORMAL)
 
     @Test(description ="Verifying the count api  is giving correct response" ,groups = {"api","regression","smoke"})
 

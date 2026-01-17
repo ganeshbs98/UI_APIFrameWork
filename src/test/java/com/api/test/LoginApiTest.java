@@ -4,6 +4,7 @@ import static com.api.utils.specUtil.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 import com.api.services.AuthService;
+import io.qameta.allure.*;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeMethod;
@@ -11,6 +12,9 @@ import org.testng.annotations.Test;
 import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.*;
 
+
+@Epic("User Management")
+@Feature("Authentication API Tests")
 public class LoginApiTest {
    private UserCredentials userCredentials;
     private AuthService authService;
@@ -19,7 +23,9 @@ public class LoginApiTest {
         userCredentials=new UserCredentials("iamfd","password");
         authService=new AuthService();
     }
-
+    @Story("Verify Login API with valid credentials")
+    @Description("Test to verify that the Login API returns a valid token and success message when provided with correct user credentials.")
+    @Severity(SeverityLevel.BLOCKER)
     @Test(description = "Verifying the Login Api is working for Iamfd",groups = {"api","regression","smoke"})
     public void LoginApiTest() {
                 authService.login(userCredentials).then()
