@@ -1,0 +1,1 @@
+[{"values":["Linux"],"name":"System_os_name"},{"values":["/usr/lib/jvm/temurin-17-jdk-amd64"],"name":"Java_home"},{"values":["http://64.227.160.186:9000/v1/"],"name":"Base URI"},{"values":["qa"],"name":"Env"},{"values":["17.0.17"],"name":"Java_Version"},{"values":["Phoenix Test Automation Framework"],"name":"Name"},{"values":["6.11.0-1018-azure"],"name":"System_os_version"}]
