@@ -56,8 +56,13 @@ jobs:
         with:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
           publish_dir: target/site/allure_maven_plugin
-          
-        
+      - name: Print Allure Report URL
+        if: always()
+        run: |
+          echo "======================================"
+          echo " Allure Report URL:"
+          echo " https://ganeshbs98.github.io/UI_APIFrameWork/"
+          echo "======================================"
       - name: Upload Surefire Reports
         if: always()
         uses: actions/upload-artifact@v4
