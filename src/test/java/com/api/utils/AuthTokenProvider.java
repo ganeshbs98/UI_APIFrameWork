@@ -3,6 +3,7 @@ package com.api.utils;
 import static com.api.constants.Role.*;
 import com.api.constants.Role;
 import com.api.pojo.UserCredentials;
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +18,8 @@ public class AuthTokenProvider {
     private static final String LOGIN_ENDPOINT="login";
     private static final Logger logger= LogManager.getLogger(AuthTokenProvider.class);
     private static Map<Role, String> tokenCache = new ConcurrentHashMap<Role,String>();
+
+    @Step("Getting auth token for the role: {role}")
     public static String getAuthToken(Role role) {
         logger.info("Checking if the token for the Role is chached:",role);
         UserCredentials userCredentials = null;

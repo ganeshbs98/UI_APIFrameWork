@@ -1,5 +1,6 @@
 package com.api.utils;
 
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,7 +18,6 @@ public class ConfigManager {
     private ConfigManager() {
 
     }
-
     static {
         logger.info("Reading the env value passed from terminal");
         if(System.getProperty("env")==null){
@@ -54,6 +54,8 @@ public class ConfigManager {
     public static Properties loadProperties() {
         return prop;
     }
+
+    @Step("Getting the property value for the key: {key}")
     public static String getProperty(String key){
         logger.info("Fetching the value for the key from properties file: "+key);
         return prop.getProperty(key);
