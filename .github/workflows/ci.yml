@@ -55,7 +55,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: target/site/allure_maven_plugin
+          publish_dir: target/site/allure_maven_plugin
           
         
       - name: Upload Surefire Reports
