@@ -45,6 +45,18 @@ jobs:
       - name: Build with Maven
         run: mvn test -DsuiteXmlFile="${{ steps.defaults.outputs.suite_file }}" -Denv="${{ steps.defaults.outputs.env }}"
 
+      - name: Generating Allure Report
+        if: always()
+        run: mvn allure:report
+        
+      - name: creating github page Branch
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN}}
+          publish_branch: target/site/allure_maven_plugin
+          
+        
       - name: Upload Surefire Reports
         if: always()
         uses: actions/upload-artifact@v4
